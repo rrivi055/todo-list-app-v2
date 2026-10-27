@@ -15,13 +15,23 @@ function TodoList() {
     setTasks([...tasks, { id: Date.now(), title, done: false }]);
   };
 
+  const markDone = (id) => {
+    setTasks(tasks.map((task) => (task.id === id ? { ...task, done: true } : task)));
+  };
+
   return (
     <div>
       <h2>רשימת משימות</h2>
       <TodoForm onAdd={addTask} />
       <ul>
         {tasks.map((task) => (
-          <TodoItem key={task.id} title={task.title} done={task.done} />
+          <TodoItem
+            key={task.id}
+            id={task.id}
+            title={task.title}
+            done={task.done}
+            onDone={markDone}
+          />
         ))}
       </ul>
     </div>
